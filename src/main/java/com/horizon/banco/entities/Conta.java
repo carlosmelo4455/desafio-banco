@@ -32,7 +32,8 @@ public class Conta {
     public Conta() {
     }
 
-    public Conta(Pessoa pessoa, String numero, String digito, double saldo, TipoConta tipoConta) {
+    public Conta(Long id, Pessoa pessoa, String numero, String digito, double saldo, TipoConta tipoConta) {
+        this.id = id;
         this.pessoa = pessoa;
         this.numero = numero;
         this.digito = digito;
