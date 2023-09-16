@@ -7,15 +7,23 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
-
     private String numero;
     private String digito;
     private double saldo;
     private char tipoConta;
+
+
+    public Conta(Long id, Pessoa pessoa, String numero, String digito, double saldo, char tipoConta) {
+        this.id = id;
+        this.pessoa = pessoa;
+        this.numero = numero;
+        this.digito = digito;
+        this.saldo = saldo;
+        this.tipoConta = tipoConta;
+    }
 
     public Long getId() {
         return id;

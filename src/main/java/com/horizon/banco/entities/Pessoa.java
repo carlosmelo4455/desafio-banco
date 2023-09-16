@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
 @Entity
 public class Pessoa {
     @Id
@@ -13,6 +14,14 @@ public class Pessoa {
     private String nome;
     private String telefone;
     private String cpf;
+
+
+    public Pessoa(Long id, String nome, String telefone, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.cpf = cpf;
+    }
 
     public Long getId() {
         return id;
