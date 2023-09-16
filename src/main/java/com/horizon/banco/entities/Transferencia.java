@@ -2,20 +2,29 @@ package com.horizon.banco.entities;
 
 import jakarta.persistence.*;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 public class Transferencia {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "conta_origem_id")
     private Conta contaOrigem;
+
     @ManyToOne
     @JoinColumn(name = "conta_destino_id")
     private Conta contaDestino;
+
+    @Min(value = 0, message = "O valor da transferência deve ser não negativo")
     private double valor;
+
+    @NotNull(message = "A data da transferência é obrigatória")
     private Date data;
 
     public Transferencia(Long id, Conta contaOrigem, Conta contaDestino, double valor, Date data) {

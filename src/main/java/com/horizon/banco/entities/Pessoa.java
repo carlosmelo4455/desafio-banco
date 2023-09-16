@@ -15,7 +15,8 @@ public class Pessoa {
     private String telefone;
     private String cpf;
 
-
+    public Pessoa(){
+    }
     public Pessoa(Long id, String nome, String telefone, String cpf) {
         this.id = id;
         this.nome = nome;
