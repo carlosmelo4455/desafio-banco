@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Horizon - Página Inicial</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+            padding-top: 20%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mb-4">Bem-vindo ao Banco Horizon</h1>
+
+    <p>Transformando o seu futuro financeiro, um passo de cada vez.</p>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <a th:href="@{/users}" class="btn btn-primary btn-lg btn-block">Ver Todos os Usuários</a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/sign}" class="btn btn-success btn-lg btn-block">Cadastrar Usuário</a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/login}" class="btn btn-info btn-lg btn-block">Acessar Usuário</a>
+        </div>
+    </div>
+
+    <p class="mt-5">
+        <a href="https://github.com/carlosmelo4455" target="_blank">GitHub - Carlos Melo</a>
+    </p>
+</div>
+
+<!-- Bootstrap JS (opcional, apenas se você precisar de funcionalidades do Bootstrap que dependem de JavaScript) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
