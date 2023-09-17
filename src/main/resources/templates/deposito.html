@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depósito - Banco Horizon</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mb-4">Depósito em Conta</h1>
+
+    <!-- Formulário para o depósito -->
+    <form action="/realizarDeposito" method="post">
+        <div class="form-group">
+            <label for="valor">Digite o valor a ser depositado:</label>
+            <input type="number" class="form-control" id="valor" name="valor" placeholder="Valor a ser depositado" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Realizar Depósito</button>
+    </form>
+
+    <!-- Mensagem de depósito bem-sucedido -->
+    <div th:if="${depositoBemSucedido}" class="mt-4 alert alert-success">
+        Depósito realizado com sucesso.
+    </div>
+
+    <!-- Botão para voltar -->
+    <a th:href="@{/home}" class="btn btn-secondary mt-3">Voltar</a>
+</div>
+
+<!-- Bootstrap JS (opcional, apenas se você precisar de funcionalidades do Bootstrap que dependem de JavaScript) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
