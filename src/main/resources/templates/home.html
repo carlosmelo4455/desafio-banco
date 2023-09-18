@@ -18,24 +18,45 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="mb-4">Bem-vindo ao Banco Horizon</h1>
+    <h1 class="mb-4">Bem-vindo <span th:text="${nomePessoa}"></span></h1>
 
-    <!-- Detalhes da conta do usuário -->
+    <!-- Detalhes das contas do usuário -->
     <div class="mb-4">
-        <h3>Detalhes da Sua Conta:</h3>
-        <p>Número da Agência: <span th:text="${conta != null ? conta.numero : ''}"></span></p>
-        <p>Dígito: <span th:text="${conta != null ? conta.digito : ''}"></span></p>
-        <p>Saldo: <span th:text="${conta != null ? conta.saldo : ''}"></span></p>
-        <p>Tipo de Conta: <span th:text="${conta != null ? conta.tipoConta : ''}"></span></p>
+        <h3>Suas Contas:</h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Número da Agência</th>
+                <th>Dígito</th>
+                <th>Saldo</th>
+                <th>Tipo de Conta</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="conta : ${contas}">
+                <td th:text="${conta.numero}"></td>
+                <td th:text="${conta.digito}"></td>
+                <td th:text="${conta.saldo}"></td>
+                <td th:text="${conta.tipoConta}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Detalhes da pessoa -->
+    <div class="mb-4">
+        <h3>Detalhes do Titular:</h3>
+        <p>Nome: <span th:text="${pessoa?.nome}"></span></p>
+        <p>Telefone: <span th:text="${pessoa?.telefone}"></span></p>
+        <p>CPF: <span th:text="${pessoa?.cpf}"></span></p>
     </div>
 
     <!-- Botões para funcionalidades -->
     <div>
-        <a th:href="@{/home/conta/criar}" class="btn btn-primary">Criar Conta</a>
-        <a th:href="@{/home/conta/saldo}" class="btn btn-primary">Consultar Saldo</a>
-        <a th:href="@{/home/conta/transferencia}" class="btn btn-primary">Realizar Transferência</a>
-        <a th:href="@{/home/conta/deposito}" class="btn btn-primary">Realizar Depósito</a>
-        <a th:href="@{/home/conta/saque}" class="btn btn-primary">Realizar Saque</a>
+        <a th:href="@{/home/criar}" class="btn btn-primary">Criar Conta</a>
+        <a th:href="@{/home/transferencia}" class="btn btn-primary">Realizar Transferência</a>
+        <a th:href="@{/home/deposito}" class="btn btn-primary">Realizar Depósito</a>
+        <a th:href="@{/home/saque}" class="btn btn-primary">Realizar Saque</a>
     </div>
 
     <br>
