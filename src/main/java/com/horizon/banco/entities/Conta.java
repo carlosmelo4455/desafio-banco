@@ -4,6 +4,7 @@ import com.horizon.banco.entities.enums.TipoConta;
 import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Min;
+import java.util.Random;
 
 @Entity
 public class Conta {
@@ -40,7 +41,17 @@ public class Conta {
         this.saldo = saldo;
         this.tipoConta = tipoConta;
     }
+    public void gerarNumeroConta() {
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(900000) + 100000;  // Números de 100000 a 999999
+        this.numero = String.valueOf(numeroAleatorio);
+    }
 
+    public void gerarDigito() {
+        Random random = new Random();
+        int digitoAleatorio = random.nextInt(10);
+        this.digito = String.valueOf(digitoAleatorio);
+    }
     public Long getId() {
         return id;
     }

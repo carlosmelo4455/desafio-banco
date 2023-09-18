@@ -35,6 +35,10 @@ public class Transferencia {
         this.data = data;
     }
 
+    public Transferencia() {
+
+    }
+
     public Long getId() {
         return id;
     }

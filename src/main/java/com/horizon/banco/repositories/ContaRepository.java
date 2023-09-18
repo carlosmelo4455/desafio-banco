@@ -15,4 +15,6 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
     List<Conta> findByPessoa(Pessoa pessoa);
 
     List<Conta> findByTipoConta(String tipoConta);
+
+    List<Conta> findByPessoaId(Long pessoaId);
 }

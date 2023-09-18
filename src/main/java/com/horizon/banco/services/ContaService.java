@@ -6,6 +6,8 @@ import com.horizon.banco.entities.enums.TipoConta;
 import com.horizon.banco.exceptions.PessoaNotFoundException;
 import com.horizon.banco.repositories.ContaRepository;
 import com.horizon.banco.repositories.PessoaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class ContaService {
     @Autowired
     private ContaRepository contaRepository;
+    private static final Logger logger = LoggerFactory.getLogger(ContaService.class);
+
     private PessoaRepository pessoaRepository;
 
     public Conta criarConta(Pessoa pessoa, String numero, String digito, double saldo, TipoConta tipoConta) {
@@ -60,5 +64,9 @@ public class ContaService {
         }
         conta.setSaldo(saldoAtual - valor);
         contaRepository.save(conta);
+    }
+    public Conta salvarConta(Conta conta) {
+        logger.info("Salvando conta: " + conta.toString());
+        return contaRepository.save(conta);
     }
 }
