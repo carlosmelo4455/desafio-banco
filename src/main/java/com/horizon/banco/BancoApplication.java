@@ -23,7 +23,7 @@ public class BancoApplication {
 		return (args) -> {
 			Pessoa p = new Pessoa(1L, "João Silva", "123456789", "123.456.789-00");
 			pessoaRepository.save(p);
-			Conta c = new Conta(1L,p,"1","123456",100, TipoConta.C);
+			Conta c = new Conta(1L,p,"123456","1",100, TipoConta.C);
 			contaRepository.save(c);
 
 		};
