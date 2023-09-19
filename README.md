@@ -65,7 +65,7 @@ Algumas coisas que essa aplicação se propõe a fazer:
 
 1º  Clone o repositório do GitHub:
 
-    -   -git clone https://github.com/carlosmelo4455/desafio-banco.git
+    -git clone https://github.com/carlosmelo4455/desafio-banco.git
 2º  Verifique se todas as dependencias do Maven foram importadas.
 
 3º  Inicie a aplicação pelo BancoApplication.java.
