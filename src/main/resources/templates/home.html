@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Banco Horizon</title>
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -53,19 +51,148 @@
 
     <!-- Botões para funcionalidades -->
     <div>
-        <a th:href="@{/home/criar}" class="btn btn-primary">Criar Conta</a>
-        <a th:href="@{/home/transferencia}" class="btn btn-primary">Realizar Transferência</a>
-        <a th:href="@{/home/deposito}" class="btn btn-primary">Realizar Depósito</a>
-        <a th:href="@{/home/saque}" class="btn btn-primary">Realizar Saque</a>
+        <!-- Fragments -->
+        <div th:replace="~{fragments/deposito}"></div>
+
+        <div th:replace="~{fragments/saque}"></div>
+
+        <div th:replace="~{fragments/transferenciaPopup}"></div>
+
     </div>
 
-    <br>
+    <button id="adicionarContaBtn" class="btn btn-primary" onclick="adicionarNovaConta()"
+            th:unless="${contas.size() >= 2}">Adicionar Nova Conta
+    </button>
 
-    <!-- Botão para finalizar sessão -->
-    <a th:href="@{/}" class="btn btn-secondary">Finalizar Sessão</a>
+    <br>
 </div>
 
-<!-- Bootstrap JS (opcional, apenas se você precisar de funcionalidades do Bootstrap que dependem de JavaScript) -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- funções JS -->
+<script>
+    function adicionarNovaConta() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/adicionarConta', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert('Nova conta adicionada com sucesso!');
+                    location.reload();
+                } else {
+                    alert('Erro ao adicionar nova conta: ' + xhr.responseText);
+                }
+            }
+        };
+
+        xhr.send();
+    }
+
+    document.getElementById('depositoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const contaSelecionada = document.getElementById('contaSelecionada').value;
+        const valorDeposito = document.getElementById('valorDeposito').value;
+
+        realizarDeposito(contaSelecionada, valorDeposito);
+    });
+
+    function realizarDeposito(tipoConta, valor) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/realizarDeposito', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert('Depósito realizado com sucesso!');
+                    location.reload();
+                } else {
+                    alert('Erro ao realizar depósito: ' + xhr.responseText);
+                }
+            }
+        };
+
+        const data = {
+            tipoConta: tipoConta,
+            valor: valor
+        };
+
+        xhr.send(JSON.stringify(data));
+    }
+
+    document.getElementById('saqueForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const contaSelecionada1 = document.getElementById('contaSelecionada1').value;
+    const valorSaque = document.getElementById('valorSaque').value;
+
+    realizarSaque(contaSelecionada1, valorSaque);
+});
+
+    function realizarSaque(tipoConta, valor) {
+    console.log('Tipo de Conta:', tipoConta);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/realizarSaque', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                alert('Saque realizado com sucesso!');
+                location.reload();
+            } else {
+                alert('Erro ao realizar saque: ' + xhr.responseText);
+            }
+        }
+    };
+
+    const data = {
+        tipoConta: tipoConta,
+        valor: valor
+    };
+
+    xhr.send(JSON.stringify(data));
+}
+    function exibirTransferencia() {
+        document.getElementById('transferenciaPopup').style.display = 'block';
+    }
+
+function enviarTransferencia(event) {
+    event.preventDefault();
+
+    const tipoConta = document.getElementById('tipoConta').value;
+    const contaDestinoId = document.getElementById('contaDestinoId').value;
+    const valorTransferencia = document.getElementById('valorTransferencia').value;
+    const dataTransferencia = document.getElementById('dataTransferencia').value;
+
+    fetch('/realizarTransferencia', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            tipoConta: tipoConta,
+            contaDestinoId: contaDestinoId,
+            valorTransferencia: valorTransferencia,
+            dataTransferencia: dataTransferencia
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Resposta do servidor:', data);
+        alert('Transferência realizada com sucesso!');
+        window.location.reload();
+
+        window.location.reload();
+    })
+    .catch(error => console.error('Erro:', error));
+}
+document.getElementById('formTransferencia').addEventListener('submit', enviarTransferencia);
+
+</script>
 </body>
 </html>
