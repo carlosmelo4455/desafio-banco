@@ -1,0 +1,13 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <h3>Criar Conta</h3>
+    <form th:action="@{/home/criar}" method="post">
+        <div class="form-group">
+            <label for="tipoConta">Tipo de Conta:</label>
+            <select class="form-control" id="tipoConta" name="tipoConta" required>
+                <option value="CONTA_CORRENTE">Conta Corrente</option>
+                <option value="CONTA_POUPANCA">Conta Poupança</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Conta</button>
+    </form>
+</div>

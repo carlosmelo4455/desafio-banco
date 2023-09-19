@@ -1,0 +1,55 @@
+<div id="transferenciaPopup" th:fragment="transferenciaPopup" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div>
+        <h4 class="modal-title">Realizar Transferência</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+        <form id="formTransferencia">
+            <div class="form-group">
+                <label for="tipoConta">Tipo de Conta:</label>
+                <select class="form-control" id="tipoConta" required>
+                    <option value="C">Conta Corrente</option>
+                    <option value="P">Conta Poupança</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="contaDestinoId">ID da Conta Destino:</label>
+                <input type="number" class="form-control" id="contaDestinoId" placeholder="Digite o ID da conta"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="valorTransferencia">Valor a ser transferido:</label>
+                <input type="number" class="form-control" id="valorTransferencia" placeholder="Digite o valor" required>
+            </div>
+            <div class="form-group">
+                <label for="dataTransferencia">Data da transferência:</label>
+                <input type="date" class="form-control" id="dataTransferencia" required>
+            </div>
+
+            <!-- Tabela para exibir informações das contas -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID da Conta</th>
+                    <th>Número da Agência</th>
+                    <th>Dígito</th>
+                    <th>Saldo</th>
+                    <th>Tipo de Conta</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop para exibir informações das contas -->
+                <tr th:each="conta : ${todasContas}">
+                    <td th:text="${conta.id}"></td>
+                    <td th:text="${conta.numero}"></td>
+                    <td th:text="${conta.digito}"></td>
+                    <td th:text="${conta.saldo}"></td>
+                    <td th:text="${conta.tipoConta}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-primary">Transferir</button>
+        </form>
+    </div>
+</div>
