@@ -9,12 +9,10 @@
 
 - [Descrição](#Descrição)
 - [Funcionalidades](#Funcionalidades)
-- [Tecnologias Utilizadas](#Tecnologias Utilizadas)
+- [Tecnologias-utilizadas](#Tecnologias-utilizadas)
 - [Requisitos](#Requisitos)
-- [Configuração e Execução](#Configuração e Execução)
-- [Backers](#backers-)
-- [Sponsors](#sponsors-)
-- [Acknowledgments](#acknowledgments)
+- [Configuração/execução](#Configuração)
+
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,7 +47,7 @@ Algumas coisas que essa aplicação se propõe a fazer:
 </p>
 
 
-## Tecnologias Utilizadas
+## Tecnologias-utilizadas
 
 - *Spring Boot*: Framework para criação de aplicativos baseados em *Spring* de forma rápida e fácil.
 - *Hibernate*: Framework de mapeamento objeto-relacional para a persistência de dados.
@@ -63,7 +61,7 @@ Algumas coisas que essa aplicação se propõe a fazer:
 * Java 17 ( não sei dizer qual versão minima do java que vai funcionar)
 * Maven
 
-## Configuração e Execução
+## Configuração
 
 1º  Clone o repositório do GitHub:
 
