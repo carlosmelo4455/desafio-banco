@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 public class Transferencia {
@@ -25,18 +24,16 @@ public class Transferencia {
     private double valor;
 
     @NotNull(message = "A data da transferência é obrigatória")
-    private Date data;
+    private String data;
 
-    public Transferencia(Long id, Conta contaOrigem, Conta contaDestino, double valor, Date data) {
+    public Transferencia(Long id, Conta contaOrigem, Conta contaDestino, double valor, String data) {
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
         this.data = data;
     }
-
     public Transferencia() {
-
     }
 
     public Long getId() {
@@ -71,11 +68,11 @@ public class Transferencia {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 }

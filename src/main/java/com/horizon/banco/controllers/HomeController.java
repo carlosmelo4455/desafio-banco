@@ -34,18 +34,17 @@ public class HomeController {
     public String paginaInicial() {
         return "index";
     }
-
     @GetMapping("/user")
     public String showAllUsers(Model model) {
-        // Busca todos os usuários
+        // lista do banco de dados "Pessoa"
         List<Pessoa> usuarios = pessoaService.buscarTodosUsuarios();
 
-        // Adiciona a lista de usuários ao modelo para ser exibida na página
+        // Adiciona a lista de usuários ao frontEnd
         model.addAttribute("usuarios", usuarios);
 
-        // Retorna o nome da página Thymeleaf (user.html)
         return "user";
     }
+
     @GetMapping("/login")
     public String paginaLogin() {
         return "login";
@@ -53,19 +52,21 @@ public class HomeController {
 
     @PostMapping("/login")
     public String fazerLogin(@RequestParam("cpf") String cpf, RedirectAttributes redirectAttributes, Model model) {
+        // autentificação do usuario por CPF
         try {
             Pessoa pessoa = pessoaService.buscarPessoaPorCpf(cpf);
-            redirectAttributes.addFlashAttribute("pessoaId", pessoa.getId());
+            redirectAttributes.addAttribute("pessoaId", pessoa.getId());
             return "redirect:/home";
 
         } catch (PessoaNotFoundException e) {
-            redirectAttributes.addFlashAttribute("error", "Pessoa não encontrada com o CPF: " + cpf);
+            redirectAttributes.addAttribute("error", "Pessoa não encontrada com o CPF: " + cpf);
             return "redirect:/login";
         }
     }
 
     @GetMapping("/sign")
     public String paginaSignIn(Model model) {
+        // inicializa o objeto para cadastro
         model.addAttribute("pessoa", new Pessoa());
         return "sign";
     }
@@ -75,6 +76,7 @@ public class HomeController {
                            @RequestParam("tipoConta") TipoConta tipoConta,
                            RedirectAttributes redirectAttributes) {
         pessoaService.salvarPessoa(pessoa);
+        // endereça conta para o usuario novo
         Conta conta = new Conta();
         conta.setPessoa(pessoa);
         conta.gerarDigito();
@@ -83,8 +85,8 @@ public class HomeController {
         conta.setTipoConta(tipoConta);
 
         contaService.salvarConta(conta);
-        redirectAttributes.addFlashAttribute("pessoaId", pessoa.getId());
-
+        // envia apenas o id do novo cadastro para o controller do /home
+        redirectAttributes.addAttribute("pessoaId", pessoa.getId());
         return "redirect:/home";
     }
 }

@@ -19,7 +19,7 @@ public class PessoaService {
 
     public Pessoa buscarPessoaPorId(Long id) {
         Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
-        if (((Optional<?>) pessoaOptional).isPresent()) {
+        if (pessoaOptional.isPresent()) {
             logger.info("pessoa encontrada: " + pessoaOptional.toString());
             return pessoaOptional.get();
         } else {
@@ -40,7 +40,6 @@ public class PessoaService {
         pessoaRepository.save(pessoa);
     }
     public List<Pessoa> buscarTodosUsuarios() {
-        // Chame o método findAll() do seu repositório para buscar todos os usuários
         return pessoaRepository.findAll();
     }
 }

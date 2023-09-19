@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-
 @Entity
 public class Pessoa {
     @Id
@@ -15,8 +13,9 @@ public class Pessoa {
     private String telefone;
     private String cpf;
 
-    public Pessoa(){
+    public Pessoa() {
     }
+
     public Pessoa(Long id, String nome, String telefone, String cpf) {
         this.id = id;
         this.nome = nome;

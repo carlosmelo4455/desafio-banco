@@ -19,7 +19,6 @@ public class ContaService {
     @Autowired
     private ContaRepository contaRepository;
     private static final Logger logger = LoggerFactory.getLogger(ContaService.class);
-
     private PessoaRepository pessoaRepository;
 
     public Conta criarConta(Pessoa pessoa, String numero, String digito, double saldo, TipoConta tipoConta) {
@@ -27,13 +26,11 @@ public class ContaService {
         Optional<Pessoa> pessoaOptional = pessoaRepository.findById(pessoa.getId());
         Pessoa pessoaExistente = pessoaOptional.orElseThrow(() -> new PessoaNotFoundException("Pessoa não encontrada"));
 
-        Optional<Conta> contaExistenteDoTipo = contaRepository.findByPessoaAndTipoConta(pessoaExistente, String.valueOf(tipoConta));
-        if (contaExistenteDoTipo.isPresent()) {
+        List<Conta> contaExistenteDoTipo = contaRepository.findByPessoaAndTipoConta(pessoaExistente, tipoConta);
+        if (!contaExistenteDoTipo.isEmpty()) {
             throw new RuntimeException("A pessoa já possui uma conta do tipo " + tipoConta);
         }
-
         Conta novaConta = new Conta(null, pessoaExistente, numero, digito, saldo, tipoConta);
-
         return contaRepository.save(novaConta);
     }
 
@@ -48,16 +45,13 @@ public class ContaService {
         }
     }
 
-    public void realizarDeposito(Conta conta, double valor) {
-
+    public void realizarDeposito(Conta conta, Double valor) {
         double saldoAtual = conta.getSaldo();
         conta.setSaldo(saldoAtual + valor);
         contaRepository.save(conta);
-
     }
 
     public void realizarSaque(Conta conta, double valor) {
-
         double saldoAtual = conta.getSaldo();
         if (saldoAtual < valor) {
             throw new RuntimeException("Saldo insuficiente para realizar o saque");
@@ -65,8 +59,8 @@ public class ContaService {
         conta.setSaldo(saldoAtual - valor);
         contaRepository.save(conta);
     }
-    public Conta salvarConta(Conta conta) {
+    public void salvarConta(Conta conta) {
         logger.info("Salvando conta: " + conta.toString());
-        return contaRepository.save(conta);
+        contaRepository.save(conta);
     }
 }

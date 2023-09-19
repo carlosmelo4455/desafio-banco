@@ -41,9 +41,10 @@ public class Conta {
         this.saldo = saldo;
         this.tipoConta = tipoConta;
     }
+
     public void gerarNumeroConta() {
         Random random = new Random();
-        int numeroAleatorio = random.nextInt(900000) + 100000;  // Números de 100000 a 999999
+        int numeroAleatorio = random.nextInt(900000) + 100000;
         this.numero = String.valueOf(numeroAleatorio);
     }
 
@@ -52,6 +53,7 @@ public class Conta {
         int digitoAleatorio = random.nextInt(10);
         this.digito = String.valueOf(digitoAleatorio);
     }
+
     public Long getId() {
         return id;
     }
